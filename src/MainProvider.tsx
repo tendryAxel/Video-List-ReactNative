@@ -17,6 +17,8 @@ const MainProvider: FC<PropsWithChildren> = ({ children }) => {
       {
         id: 0,
         name: "Frieren the movie",
+        imageRepresentationUrl:
+          "https://leclaireur.fnac.com/wp-content/uploads/2023/11/frieren-1.jpg",
       },
       {
         id: 1,

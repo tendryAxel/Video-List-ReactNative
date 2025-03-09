@@ -1,4 +1,4 @@
-import { View, ViewStyle } from "react-native"
+import { Image, ImageStyle, View, ViewStyle } from "react-native";
 import { ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { FC } from "react"
@@ -9,12 +9,22 @@ export type VideoAsListElementProps = {
   video: VideoType
 }
 
+const defaultImageToDisplay = require("../../../assets/images/no_image.png");
 const VideoAsListElement: FC<VideoAsListElementProps> = ({ video }) => {
   const { themed } = useAppTheme()
 
   return (
     <View style={themed($defaultStyle)}>
-      <Text text={video.id.toString()} />
+      <Image
+        source={
+          video.imageRepresentationUrl
+            ? {
+              uri: video.imageRepresentationUrl
+            }
+            : defaultImageToDisplay
+        }
+        style={themed($imageRepresentation)}
+      />
       <Text text={video.name} />
     </View>
   )
@@ -32,6 +42,11 @@ const $defaultStyle: ThemedStyle<ViewStyle> = ({ colors, spacing }) => ({
   padding: spacing.sm,
   gap: spacing.sm,
   backgroundColor: colors?.background,
+})
+
+const $imageRepresentation: ThemedStyle<ImageStyle> = () => ({
+  width: 100,
+  height: "100%",
 })
 
 export default VideoAsListElement

@@ -30,5 +30,5 @@ const $container: ThemedStyle<ViewStyle> = ({ colors }) => ({
 
 const $listVideos: ThemedStyle<ViewStyle> = ({ spacing }) => ({
   margin: spacing.sm,
-  gap: spacing.sm
+  gap: spacing.sm,
 })
