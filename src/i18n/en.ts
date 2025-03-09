@@ -4,6 +4,9 @@ const en = {
     cancel: "Cancel",
     back: "Back",
   },
+  videos: {
+    noContent: "You have no content to display.",
+  },
 }
 
 export default en
