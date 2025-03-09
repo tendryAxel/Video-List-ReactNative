@@ -1,21 +1,22 @@
-import { Image, ImageStyle, View, ViewStyle } from "react-native"
+import { FlatList, View, ViewStyle } from "react-native"
 import { Screen } from "@/components"
 import { ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
-
-const welcomeLogo = require("../../assets/images/logo.png")
+import { useContext } from "react"
+import { MainContext } from "@/MainProvider"
+import VideoAsListElement from "@/components/video/VideoAsListElement"
 
 export default function WelcomeScreen() {
-  const { theme, themed } = useAppTheme()
+  const { themed } = useAppTheme()
+  const { cachedVideos } = useContext(MainContext)
 
   return (
     <Screen safeAreaEdges={["top"]} contentContainerStyle={themed($container)}>
       <View style={themed($container)}>
-        <Image
-          style={themed($logo)}
-          source={welcomeLogo}
-          resizeMode="contain"
-          tintColor={theme.isDark ? theme.colors.palette.neutral900 : undefined}
+        <FlatList
+          data={cachedVideos}
+          renderItem={({ item }) => <VideoAsListElement key={item.id} video={item} />}
+          contentContainerStyle={themed($listVideos)}
         />
       </View>
     </Screen>
@@ -27,6 +28,7 @@ const $container: ThemedStyle<ViewStyle> = ({ colors }) => ({
   backgroundColor: colors.background,
 })
 
-const $logo: ThemedStyle<ImageStyle> = () => ({
-  width: 100,
+const $listVideos: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  margin: spacing.sm,
+  gap: spacing.sm
 })
